@@ -1,11 +1,11 @@
-package model;
+package id.kawahEdukasi.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "Item")
+@Entity(name = "KawahEdukasiItem")
+@Table(name = "item")
 public class Item extends PanacheEntityBase {
     @Id
     @SequenceGenerator(name = "ItemSequence", sequenceName = "Item_sequence", allocationSize = 1, initialValue = 1)
@@ -20,7 +20,7 @@ public class Item extends PanacheEntityBase {
     public Integer count;
 
     @Column(name = "price")
-    public Double price;
+    public Integer price;
 
     @Column(name = "type")
     public String type;
