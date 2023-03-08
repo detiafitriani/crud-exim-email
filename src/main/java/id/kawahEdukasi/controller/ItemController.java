@@ -31,7 +31,6 @@ public class ItemController {
         return itemService.findById(id);
     }
     @POST
-    @Transactional
     public Response post(Map<String, Object> request) {
         return itemService.post(request);
     }
