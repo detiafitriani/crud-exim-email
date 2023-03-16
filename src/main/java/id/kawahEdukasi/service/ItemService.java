@@ -11,16 +11,19 @@ import java.util.List;
 import java.util.Map;
     @ApplicationScoped
     public class ItemService {
-        public List<Item> findAll() {
+        @Transactional
+        public List<Item> getAll() {
+
             return Item.listAll();
         }
 
-        public Item findById(Long id) {
+        public Item DetailById(Long id) {
+
             return Item.findById(id);
         }
 
     @Transactional
-    public Response post(Map<String, Object> request) {
+   public Response create(Map<String, Object> request) {
 
         Item item = new Item();
         item.name = request.get("name").toString();
@@ -34,7 +37,7 @@ import java.util.Map;
         return Response.status(Response.Status.CREATED).entity(item).build();
     }
     @Transactional
-    public Response put(@PathParam("id") Long id, Map<String, Object> request) {
+    public Response update(@PathParam("id") Long id, Map<String, Object> request) {
         Item item = Item.findById(id);
         if(item == null) {
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -47,7 +50,7 @@ import java.util.Map;
 
         item.persist();
 
-        return Response.status(Response.Status.CREATED).entity(new HashMap<>()).build();
+        return Response.status(Response.Status.OK).entity(item).build();
     }
 
 
@@ -63,6 +66,5 @@ import java.util.Map;
 
         return Response.status(Response.Status.NO_CONTENT).entity(new HashMap<>()).build();
     }
-
 
 }
