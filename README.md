@@ -1,71 +1,105 @@
-# tugas-week-6
+# CRUD Item Management, Export-Import, Email Sending and Email Scheduler
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project is a CRUD (Create-Read-Update-Delete) application for managing data Items.
+It also includes the ability to export data to PDF, Excel, and CSV formats, as well as import data from CSV and Excel files. In addition, there are endpoints for sending emails, either with just the email body or with attached files, and a scheduler for sending emails.
+The project is built using Java language with Quarkus framework and Maven build tool, and uses PostgreSQL for database management.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Prerequisites
+-Java JDK 11 or higher
+-Quarkus
+-Maven
+-Postgresql
 
-## Running the application in dev mode
 
-You can run your application in dev mode that enables live coding using:
+## Getting Started
+Setting up the Database
+1. Create a new database in PostgreSQL.
+2. Open the application.properties file located in the src/main/resources directory.
+3. Initialize your port 
 ```shell script
-./mvnw compile quarkus:dev
+.# application.properties
+server.port={your port}
+quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/{database_name}
+quarkus.datasource.username={username}
+quarkus.datasource.password={password}
 ```
+4. Replace the quarkus.datasource.jdbc.url property with the JDBC URL for your PostgreSQL database.
+5.  Replace the quarkus.datasource.username and quarkus.datasource.password properties with your PostgreSQL username and password, respectively.
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## Running the Application
+1. Clone the repository to your local machine.
 
-## Packaging and running the application
+2. Navigate to the project directory in your terminal.
 
-The application can be packaged using:
+3. Run the following command to build the project:
 ```shell script
-./mvnw package
+./mvn clean package
 ```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
+4.Once the build is complete, run the following command to start the application:
 ```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+.java -jar target/{project-name}-runner.jar
 ```
+Replace {project-name} with the name of your project.
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/tugas-week-6-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- RESTEasy Reactive ([guide](https://quarkus.io/guides/resteasy-reactive)): A JAX-RS implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+5. The application will now be running on http://localhost:{your port}.
 
 
-### RESTEasy Reactive
+# Endpoints
+## Item Management Endpoints
 
-Easily start your Reactive RESTful Web Services
 
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+## GET /item
+Returns a list of all Items in the database.
+
+## GET /item/{id}
+Returns the details of the Item with the specified ID.
+
+## POST /item
+Creates a new Item. The request body should contain the Item data in JSON format.
+
+## PUT /item/{id}
+Updates the details of the Item with the specified ID. The request body should contain the updated Item data in JSON format.
+
+## DELETE /item/{id}
+Deletes the Item with the specified ID.
+
+## Data Export Endpoints
+## GET /export/pdf
+Exports all Item data to a PDF file and returns the file as a response.
+
+## GET /export/excel
+Exports all Item data to an Excel file and returns the file as a response.
+
+## GET /export/csv
+Exports all Item data to a CSV file and returns the file as a response.
+
+# Data Import Endpoints
+## POST /import/excel
+Imports Item data from an Excel file. The request body should contain the Excel file.
+
+## POST /import/csv
+Imports Item data from a CSV file. The request body should contain the CSV file.
+
+# Email Sending Endpoints
+## POST /mail
+Sends an email with the provided email body.
+
+## POST /mail/excel
+Sends an email with the provided email body and an attached Excel file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
