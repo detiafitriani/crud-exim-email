@@ -5,10 +5,10 @@ It also includes the ability to export data to PDF, Excel, and CSV formats, as w
 The project is built using Java language with Quarkus framework and Maven build tool, and uses PostgreSQL for database management.
 
 ## Prerequisites
--Java JDK 11 or higher
--Quarkus
--Maven
--Postgresql
+- Java JDK 11 or higher
+- Quarkus
+- Maven
+- Postgresql
 
 
 ## Getting Started
